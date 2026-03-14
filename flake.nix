@@ -41,13 +41,13 @@
               python = "py3";
               hash = "sha256-ct66zoAd7IsshB7jR1/ONrewDqjiWYIuFVV9393B5GQ=";
             };
-
             meta = {
               description = "A simple and flexible messaging format and delivery protocol that allows a wide variety of implementations, while using as little bandwidth as possible";
               homepage = "https://github.com/markqvist/lxmf";
               license = reticulumLicense;
             };
           };
+
           lxst = buildPythonPackage rec {
             pname = "lxst";
             version = "0.4.6";
@@ -65,13 +65,13 @@
               python = "py3";
               hash = "sha256-SbPAPpPBjhPIOtBMOfujhtoXSsZJuREkxpWkyvr3j1g=";
             };
-
             meta = {
               description = "A simple and flexible real-time streaming format and delivery protocol that allows a wide variety of implementations, while using as little bandwidth as possible";
               homepage = "https://git.unsigned.io/markqvist/lxst";
               license = reticulumLicense;
             };
           };
+
           numpy = pkgs.${system}.python312Packages.numpy.overrideAttrs (prevAttrs: rec {
             version = "2.3.5";
             src = fetchFromGitHub {
@@ -82,6 +82,7 @@
               hash = "sha256-CMgJmsjPLgMCWN2iJk0OzcKIlnRRcayrTAns51S4B6k=";
             };
           });
+
           pycodec2 = buildPythonPackage rec {
             pname = "pycodec2";
             version = "ba67d50883ca7e8885618c741a9f80a9ac1d9a7f";
@@ -100,13 +101,13 @@
               rev = "ba67d50883ca7e8885618c741a9f80a9ac1d9a7f";
               hash = "sha256-gt/e2fmGffwlhSdUbg1ireCtQJ0xju+5u+QyttTZDog=";
             };
-
             meta = {
               description = "Cython wrapper for Codec 2";
               homepage = "https://github.com/gregorias/pycodec2";
               license = lib.licenses.bsd3;
             };
           };
+
           pyobjus = buildPythonPackage rec {
             pname = "pyobjus";
             version = "1.2.4";
@@ -122,13 +123,13 @@
               inherit pname version;
               hash = "sha256-SHcQH/O3C3/SsSsoeKsj7kiAGM5hPxKUi1j/TH42M4g=";
             };
-
             meta = {
               description = "Access Objective-C classes from Python";
               homepage = "https://github.com/kivy/pyobjus";
               license = lib.licenses.mit;
             };
           };
+
           rns = buildPythonPackage rec {
             pname = "rns";
             version = "1.1.4";
@@ -143,7 +144,6 @@
               python = "py3";
               hash = "sha256-sqF1q9ZNFYHdBYIGgyeT2/cFOjBMgZ/4vBQ6ecSct0c=";
             };
-
             meta = {
               description = "Cryptography-based networking stack for building local and wide-area networks with readily available hardware";
               homepage = "https://reticulum.network/";
@@ -156,30 +156,28 @@
             version = "1.8.2";
             format = "wheel";
             dependencies = [
+              beautifulsoup4
+              kivy
               lxmf
               lxst
-              kivy
+              materialyoucolor
+              mistune
               numpy
               pillow
-              mistune
-              qrcode
-              materialyoucolor
-              beautifulsoup4
               pycodec2
               pyobjus
+              qrcode
               rns
             ];
-
-            preFixup = ''
-              patch --strip 1 --unified --directory $out/lib/python3.12/site-packages --input ${./fix-string-type.patch}
-            '';
             src = fetchPypi {
               inherit format pname version;
               dist = "py3";
               python = "py3";
               hash = "sha256-gG53OLgphnXW44BTaPQmL9HJu1oCLZubqrJ4uOL9bKI=";
             };
-
+            preFixup = ''
+              patch --strip 1 --unified --directory $out/lib/python3.12/site-packages --input ${./fix-string-type.patch}
+            '';
             meta = {
               description = "Extensible Reticulum LXMF messaging and LXST telephony client";
               homepage = "https://github.com/markqvist/Sideband";
