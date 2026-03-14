@@ -12,20 +12,15 @@
       ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
       pkgs = forAllSystems (system: nixpkgs.legacyPackages.${system});
+      reticulumLicense = rec {
+        shortName = "Reticulum License";
+        free = false;
+        deprecated = false;
+        redistributable = free;
+        url = "https://reticulum.network/manual/license.html";
+      };
     in
     {
-      #computeWheelUrl =
-      # {
-      #   pname,
-      #   version,
-      #   dist ? "py2.py3",
-      #   python ? "py2.py3",
-      #   abi ? "none",
-      #   platform ? "any",
-      # }:
-      # # Fetch a wheel. By default we fetch an universal wheel.
-      # # See https://www.python.org/dev/peps/pep-0427/#file-name-convention for details regarding the optional arguments.
-      # "https://files.pythonhosted.org/packages/${dist}/${builtins.substring 0 1 pname}/${pname}/${pname}-${version}-${python}-${abi}-${platform}.whl";
       packages = forAllSystems (
         system:
         with pkgs.${system}.python312Packages;
@@ -50,8 +45,7 @@
             meta = {
               description = "A simple and flexible messaging format and delivery protocol that allows a wide variety of implementations, while using as little bandwidth as possible";
               homepage = "https://github.com/markqvist/lxmf";
-              # TODO
-              # license = lib.licenses.cc-by-nc-sa-40;
+              license = reticulumLicense;
             };
           };
           lxst = buildPythonPackage rec {
@@ -75,8 +69,7 @@
             meta = {
               description = "A simple and flexible real-time streaming format and delivery protocol that allows a wide variety of implementations, while using as little bandwidth as possible";
               homepage = "https://git.unsigned.io/markqvist/lxst";
-              # TODO
-              # license = lib.licenses.cc-by-nc-sa-40;
+              license = reticulumLicense;
             };
           };
           numpy = pkgs.${system}.python312Packages.numpy.overrideAttrs (prevAttrs: rec {
@@ -111,8 +104,7 @@
             meta = {
               description = "Cython wrapper for Codec 2";
               homepage = "https://github.com/gregorias/pycodec2";
-              # TODO
-              # license = lib.licenses.cc-by-nc-sa-40;
+              license = lib.licenses.bsd3;
             };
           };
           pyobjus = buildPythonPackage rec {
@@ -134,8 +126,7 @@
             meta = {
               description = "Access Objective-C classes from Python";
               homepage = "https://github.com/kivy/pyobjus";
-              # TODO
-              # license = lib.licenses.cc-by-nc-sa-40;
+              license = lib.licenses.mit;
             };
           };
           rns = buildPythonPackage rec {
@@ -156,8 +147,7 @@
             meta = {
               description = "Cryptography-based networking stack for building local and wide-area networks with readily available hardware";
               homepage = "https://reticulum.network/";
-              # TODO
-              # license = lib.licenses.cc-by-nc-sa-40;
+              license = reticulumLicense;
             };
           };
 
@@ -193,8 +183,7 @@
             meta = {
               description = "Extensible Reticulum LXMF messaging and LXST telephony client";
               homepage = "https://github.com/markqvist/Sideband";
-              # TODO
-              # license = lib.licenses.cc-by-nc-sa-40;
+              license = reticulumLicense;
               mainProgram = "sideband";
             };
           };
