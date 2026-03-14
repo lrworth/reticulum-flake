@@ -1,0 +1,13 @@
+diff --git a/sbapp/plyer/platforms/macosx/storagepath.py b/sbapp/plyer/platforms/macosx/storagepath.py
+index 79973a4..273fc27 100644
+--- a/sbapp/plyer/platforms/macosx/storagepath.py
++++ b/sbapp/plyer/platforms/macosx/storagepath.py
+@@ -24,7 +24,7 @@ class OSXStoragePath(StoragePath):
+ 
+     def _get_home_dir(self):
+         home_dir_NSURL = self.defaultManager.homeDirectoryForCurrentUser
+-        return home_dir_NSURL.absoluteString.UTF8String()
++        return home_dir_NSURL.absoluteString.UTF8String().decode()
+ 
+     def _get_external_storage_dir(self):
+         return 'Method not implemented for current platform.'
